@@ -8,5 +8,7 @@ class Model {
   String email;
   DateTime birthdate;
   TimeOfDay time;
-  Model(this.name, this.number, this.email, this.birthdate, this.time);
+  String password;
+  Model(this.name, this.number, this.email, this.birthdate, this.time,
+      this.password);
 }

@@ -75,6 +75,7 @@ class _Page2State extends State<Page2> {
                                     raw(title: "Mobile No : "),
                                     raw(title: "Email : "),
                                     raw(title: "Birth Date : "),
+                                    raw(title: "Password : "),
                                   ],
                                 ),
                                 Column(
@@ -86,6 +87,7 @@ class _Page2State extends State<Page2> {
                                     raw(
                                         title:
                                             "${Dateformat(widget.model[index].birthdate)}    ${widget.model[index].time.format(context)}"),
+                                    raw(title: widget.model[index].password),
                                   ],
                                 ),
                               ],

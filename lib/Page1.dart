@@ -1,11 +1,16 @@
 // ignore_for_file: must_call_super, duplicate_ignore, file_names, non_constant_identifier_names
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:profilelists/Common/ShowMsg.dart';
 import 'package:profilelists/Common/Txtfield.dart';
+import 'package:profilelists/Common/Validation.dart';
 import 'package:profilelists/Model.dart';
 import 'package:profilelists/Page2.dart';
+
+enum valuetype { name, email, password, phone, birthdate }
 
 class Page1 extends StatefulWidget {
   const Page1({super.key});
@@ -19,20 +24,32 @@ class _Page1State extends State<Page1> {
   TextEditingController namecon = TextEditingController();
   TextEditingController emailcon = TextEditingController();
   TextEditingController numbercon = TextEditingController();
+  TextEditingController passcon = TextEditingController();
+  TextEditingController datercon =
+      TextEditingController(text: 'Select Date Time');
   DateTime date = DateTime.now();
   TimeOfDay time = TimeOfDay.now();
-
-  String Dateformat(DateTime date) {
-    DateFormat formatter = DateFormat('dd-MMM-yyyy    h : m : s');
-    return formatter.format(date);
-  }
 
   choosetime(BuildContext context) async {
     await showTimePicker(context: context, initialTime: TimeOfDay.now())
         .then((value) {
       time = value!;
+      setState(() {
+        datercon.text = setText(date, time);
+      });
     });
     ;
+  }
+
+  String setText(DateTime date, TimeOfDay time) {
+    DateFormat formatter = DateFormat('dd-MMM-yyyy');
+    formatter.format(date);
+    time.format(context);
+
+    String ans =
+        '${date.day}-${date.month}-${date.year}  ${time.format(context)}';
+
+    return ans;
   }
 
   chooseDate(BuildContext context) async {
@@ -43,6 +60,7 @@ class _Page1State extends State<Page1> {
             lastDate: DateTime.now())
         .then((value) {
       date = value!;
+      choosetime(context);
     });
   }
 
@@ -52,6 +70,7 @@ class _Page1State extends State<Page1> {
     namecon.dispose();
     emailcon.dispose();
     numbercon.dispose();
+    datercon.dispose();
   }
 
   @override
@@ -66,11 +85,11 @@ class _Page1State extends State<Page1> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Color.fromARGB(255, 202, 156, 136),
                     borderRadius: BorderRadius.all(Radius.circular(30))),
                 width: 350,
-                height: 510,
+                height: 600,
                 child: Card(
                   color: Colors.transparent,
                   elevation: 20,
@@ -98,75 +117,47 @@ class _Page1State extends State<Page1> {
                         keyboard: TextInputType.number,
                         icon: Icons.call,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                          elevation: 3,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                const CircleAvatar(
-                                  child: Icon(Icons.calendar_month_outlined),
-                                ),
-                                SizedBox(
-                                  width: 200,
-                                  child: InkWell(
-                                      onTap: () {
-                                        setState(() {
-                                          choosetime(context);
-                                          chooseDate(context);
-                                        });
-                                      },
-                                      child: Text(
-                                          "${date.day}-${date.month}-${date.year}      ${time.format(context)}")),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
+                      Txtfield(
+                        label: "Password",
+                        hint: "Enter Your Password",
+                        controller: passcon,
+                        icon: Icons.password,
+                        pass: true,
+                      ),
+                      Txtfield(
+                        onTap: () {
+                          setState(() {
+                            chooseDate(context);
+                          });
+                        },
+                        isVisible: true,
+                        icon: Icons.calendar_month_outlined,
+                        controller: datercon,
                       ),
                       ElevatedButton(
                           onPressed: () {
-                            setState(() {
-                              if (namecon.text.isNotEmpty) {
-                                if (namecon.text.contains(r'[0-9]')) {
-                                  showMsg("Please Write Your Name Correctly");
-                                  return;
-                                }
-                              } else {
-                                showMsg("Please Write Your Name");
-                                return;
-                              }
-                              if (emailcon.text.isNotEmpty) {
-                              } else {
-                                showMsg("Please Write Your Email");
-                                return;
-                              }
-                              if (numbercon.text.isNotEmpty) {
-                                if (namecon.text.contains(r'[a-z A-Z]')) {
-                                  showMsg(
-                                      "Please Write Your Mobile Number Correctly");
-                                  return;
-                                }
-                              } else {
-                                showMsg("Please Write Your Mobile Number");
-                                return;
-                              }
-
+                            if (!validate(
+                                namecon.text.trim(), valuetype.name)) {
+                              print("Data Not Valid");
+                            } else if (!validate(
+                                emailcon.text.trim(), valuetype.email)) {
+                              print("Data Not Valid");
+                            } else if (!validate(
+                                numbercon.text.trim(), valuetype.phone)) {
+                              print("Data Not Valid");
+                            } else if (!validate(
+                                passcon.text.trim(), valuetype.password)) {
+                              print("Data Not Valid");
+                            } else {
                               showMsg("Value Added !!");
                               model.add(Model(namecon.text, numbercon.text,
-                                  emailcon.text, date, time));
+                                  emailcon.text, date, time, passcon.text));
                               namecon.clear();
                               numbercon.clear();
                               emailcon.clear();
                               date = DateTime.now();
                               time = TimeOfDay.now();
-                              // Navigator.of(context).push(MaterialPageRoute(
-                              //   builder: (context) => Page2(model: model),
-                              // ));
-                            });
+                            }
                           },
                           child: const Icon(Icons.add)),
                     ],

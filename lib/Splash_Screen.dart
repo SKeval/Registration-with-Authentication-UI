@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:profilelists/Page1.dart';
+import 'package:profilelists/login.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

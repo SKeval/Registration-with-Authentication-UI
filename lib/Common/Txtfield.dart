@@ -11,15 +11,22 @@ class Txtfield extends StatefulWidget {
   String? hint;
   String? label;
   DateTime? date;
+  bool isVisible;
+  bool pass;
+  VoidCallback? onTap;
 
-  Txtfield(
-      {super.key,
-      this.label,
-      this.hint,
-      this.keyboard = TextInputType.text,
-      this.icon,
-      this.date,
-      this.controller});
+  Txtfield({
+    super.key,
+    this.label,
+    this.isVisible = false,
+    this.hint,
+    this.keyboard = TextInputType.text,
+    this.icon,
+    this.date,
+    this.controller,
+    this.onTap,
+    this.pass = false,
+  });
 
   @override
   State<Txtfield> createState() => _TxtfieldState();
@@ -46,35 +53,10 @@ class _TxtfieldState extends State<Txtfield> {
                       width: 200,
                       child: widget.date == null
                           ? TextField(
+                              obscureText: widget.pass,
+                              onTap: widget.onTap,
+                              readOnly: widget.isVisible,
                               controller: widget.controller,
-                              onSubmitted: (value) {
-                                if (value.isEmpty) {
-                                  showMsg("Please Enter ${widget.label}");
-                                  return;
-                                }
-                              },
-                              onEditingComplete: () {
-                                if (widget.keyboard == TextInputType.number) {
-                                  if (widget.controller!.text
-                                      .contains(RegExp(r'[a-z A-Z]'))) {
-                                    showMsg("Please Enter Number Only");
-                                  }
-                                }
-                                if (widget.keyboard == TextInputType.text) {
-                                  if (widget.controller!.text
-                                      .contains(RegExp(r'[0-9]'))) {
-                                    showMsg("Please Enter Letter Only");
-                                  }
-                                }
-                                if (widget.keyboard ==
-                                    TextInputType.emailAddress) {
-                                  if (widget.controller!.text
-                                      .contains(RegExp(r'[a-z@A-Z]'))) {
-                                  } else {
-                                    showMsg("Please Enter Valid Email Address");
-                                  }
-                                }
-                              },
                               keyboardType: widget.keyboard,
                               decoration: InputDecoration(
                                 hintText: widget.hint,
