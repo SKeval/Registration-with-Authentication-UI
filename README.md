@@ -1,4 +1,4 @@
-# profilelists
+# Registration UI
 
 Registration Form UI Design by Keval Savaliya.
 ## Getting Started
