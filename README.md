@@ -1,6 +1,6 @@
 # Registration UI
 
-# Registration Form UI Design by Keval Savaliya.
+Registration Form UI Design by Keval Savaliya.
 
 <img src="https://github.com/SKeval/profilelists/assets/100701924/28fe570a-0fdd-4b1b-b369-be95e2b002f8" data-canonical-src="https://github.com/SKeval/profilelists/assets/100701924/28fe570a-0fdd-4b1b-b369-be95e2b002f8" width="200" height="400" />
 
