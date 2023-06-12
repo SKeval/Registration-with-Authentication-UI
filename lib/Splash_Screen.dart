@@ -1,8 +1,11 @@
+// ignore_for_file: unused_import, file_names
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:profilelists/Page1.dart';
 import 'package:profilelists/login.dart';
+import 'package:profilelists/login_ff.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -24,7 +27,7 @@ changePage(BuildContext context) {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    // TODO: implement initState
+    super.initState();
     changePage(context);
   }
 

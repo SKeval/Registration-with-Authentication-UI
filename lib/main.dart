@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:profilelists/Page1.dart';
 import 'package:profilelists/Page2.dart';
 import 'package:profilelists/Splash_Screen.dart';
+import 'package:profilelists/login_ff.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
           //brightness: Brightness.dark,
           primaryColor: Colors.brown[200],
           primarySwatch: Colors.brown),
-      home: const SplashScreen(),
+      home: const LoginFF(),
     );
   }
 }

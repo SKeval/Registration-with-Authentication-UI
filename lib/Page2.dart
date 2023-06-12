@@ -1,14 +1,17 @@
-// ignore_for_file: file_names, must_be_immutable
+// ignore_for_file: file_names, must_be_immutable, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:profilelists/Common/Data.dart';
 import 'package:profilelists/Common/ShowMsg.dart';
 import 'package:profilelists/Common/raw.dart';
 import 'Model.dart';
 
 class Page2 extends StatefulWidget {
   List<Model> model = [];
-  Page2({super.key, required this.model});
+  Page2({
+    super.key,
+  });
 
   @override
   State<Page2> createState() => _Page2State();
@@ -37,7 +40,7 @@ class _Page2State extends State<Page2> {
                     onPressed: () {
                       setState(() {
                         showMsg("All Profile Deleted !!");
-                        widget.model.clear();
+                        DataList.clear();
                       });
                     },
                     child: const Text("Remove All"))
@@ -46,7 +49,7 @@ class _Page2State extends State<Page2> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: widget.model.length,
+              itemCount: DataList.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -81,13 +84,13 @@ class _Page2State extends State<Page2> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    raw(title: widget.model[index].name),
-                                    raw(title: widget.model[index].number),
-                                    raw(title: widget.model[index].email),
+                                    raw(title: DataList[index].name),
+                                    raw(title: DataList[index].number),
+                                    raw(title: DataList[index].email),
                                     raw(
                                         title:
-                                            "${Dateformat(widget.model[index].birthdate)}    ${widget.model[index].time.format(context)}"),
-                                    raw(title: widget.model[index].password),
+                                            "${Dateformat(DataList[index].birthdate)}    ${DataList[index].time.format(context)}"),
+                                    raw(title: DataList[index].password),
                                   ],
                                 ),
                               ],
@@ -100,7 +103,7 @@ class _Page2State extends State<Page2> {
                                 onPressed: () {
                                   setState(() {
                                     showMsg("Profile Deleted !!");
-                                    widget.model.removeAt(index);
+                                    DataList.removeAt(index);
                                   });
                                 },
                                 icon: const Icon(

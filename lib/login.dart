@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 
 enum ValidTypes { email, pass, phone, name }
@@ -89,7 +91,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login Page'),
+        title: const Text('Login Page'),
       ),
       body: Column(
         children: [
@@ -112,7 +114,7 @@ class _LoginState extends State<Login> {
                     print('Data is Not Valid');
                   }
                 },
-                child: Text('Login')),
+                child: const Text('Login')),
           )
         ],
       ),

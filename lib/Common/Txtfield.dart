@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, must_be_immutable, unused_import
+// ignore_for_file: file_names, must_be_immutable, unused_import, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -14,6 +14,7 @@ class Txtfield extends StatefulWidget {
   bool isVisible;
   bool pass;
   VoidCallback? onTap;
+  String? Function(String? val)? Onvalidator;
 
   Txtfield({
     super.key,
@@ -25,6 +26,7 @@ class Txtfield extends StatefulWidget {
     this.date,
     this.controller,
     this.onTap,
+    this.Onvalidator,
     this.pass = false,
   });
 
@@ -52,7 +54,8 @@ class _TxtfieldState extends State<Txtfield> {
                   SizedBox(
                       width: 200,
                       child: widget.date == null
-                          ? TextField(
+                          ? TextFormField(
+                              validator: widget.Onvalidator,
                               obscureText: widget.pass,
                               onTap: widget.onTap,
                               readOnly: widget.isVisible,
