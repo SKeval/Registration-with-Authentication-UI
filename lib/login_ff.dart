@@ -106,19 +106,23 @@ class _LoginFFState extends State<LoginFF> {
                         ElevatedButton(
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
-                                for (var element in DataList) {
-                                  if (emailcon.text == element.email) {
-                                    if (passcon.text == element.password) {
-                                      showMsg("Login Successfull");
-                                      Navigator.of(context)
-                                          .push(MaterialPageRoute(
-                                        builder: (context) => Page2(),
-                                      ));
+                                if (DataList.isEmpty) {
+                                  showMsg("No Data Found");
+                                } else {
+                                  for (var element in DataList) {
+                                    if (emailcon.text == element.email) {
+                                      if (passcon.text == element.password) {
+                                        showMsg("Login Successfull");
+                                        Navigator.of(context)
+                                            .push(MaterialPageRoute(
+                                          builder: (context) => Page2(),
+                                        ));
+                                      } else {
+                                        showMsg("Password doesn't Matched");
+                                      }
                                     } else {
-                                      showMsg("Password doesn't Matched");
+                                      showMsg("No Data Found");
                                     }
-                                  } else {
-                                    showMsg("Email ID doesn't Exist");
                                   }
                                 }
                               }

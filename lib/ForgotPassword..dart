@@ -55,7 +55,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
                             String regMail =
                                 r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
-                            if (!RegExp(regMail).hasMatch(val!)) {
+                            if (!RegExp(regMail).hasMatch(val)) {
                               return "Please enter valid email id";
                             }
                             return null;
@@ -110,7 +110,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                   Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => LoginFF(),
+                                        builder: (context) => const LoginFF(),
                                       ));
                                 } else {
                                   showMsg(
