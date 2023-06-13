@@ -1,5 +1,6 @@
 // ignore_for_file: unused_import
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:profilelists/Common/Data.dart';
@@ -24,6 +25,61 @@ class _LoginFFState extends State<LoginFF> {
 
   //key
   final formKey = GlobalKey<FormState>();
+
+  //Awesome Diologue
+  ShowAwesomeLogin(String user) {
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.warning,
+      animType: AnimType.rightSlide,
+      title: 'Login Successfull',
+      // desc: 'Welcome $user',
+      btnCancelOnPress: () {},
+      body: Container(
+        child: const Text("Hello Diolog"),
+      ),
+      btnOkOnPress: () {},
+      dismissOnTouchOutside: false,
+    ).show();
+  }
+
+//Alert Diologue
+  ShowLoginDiolouge(String user) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        //   return Dialog(
+        //     backgroundColor: Colors.yellow,
+        //     child: Container(
+        //       height: 300,
+        //       color: Colors.black,
+        //       child: Column(
+        //         children: [const Text("Login Successful")],
+        //       ),
+        //     ),
+        //   );
+        return AlertDialog(
+          title: const Text("Login Successful"),
+          content: Text("Welcome, How was your day $user"),
+          actions: [
+            // ElevatedButton(
+            //     onPressed: () {
+            //       Navigator.of(context).pop();
+            //     },
+            //     child: const Text("OK")),
+            OutlinedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => Page2(),
+                  ));
+                },
+                child: const Text("OK")),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

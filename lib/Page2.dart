@@ -1,14 +1,19 @@
 // ignore_for_file: file_names, must_be_immutable, non_constant_identifier_names
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:profilelists/Common/Alert%20Button.dart';
 import 'package:profilelists/Common/Data.dart';
 import 'package:profilelists/Common/ShowMsg.dart';
 import 'package:profilelists/Common/raw.dart';
+import 'package:profilelists/login_ff.dart';
 import 'Model.dart';
+import 'Common/Alert Button.dart';
 
 class Page2 extends StatefulWidget {
   List<Model> model = [];
+
   Page2({
     super.key,
   });
@@ -27,6 +32,13 @@ class _Page2State extends State<Page2> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                Diolog.showAwesome(context, "Log Out?", "Are you Sure?");
+              },
+              icon: const Icon(Icons.logout_rounded))
+        ],
         title: const Text("View Details"),
       ),
       body: Column(
