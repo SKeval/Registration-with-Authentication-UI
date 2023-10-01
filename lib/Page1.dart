@@ -9,6 +9,8 @@ import 'package:profilelists/Common/Data.dart';
 import 'package:profilelists/Common/ShowMsg.dart';
 import 'package:profilelists/Common/Txtfield.dart';
 import 'package:profilelists/Common/Validation.dart';
+import 'package:profilelists/Common/colors.dart';
+import 'package:profilelists/Common/sharedPreference.dart';
 import 'package:profilelists/Model.dart';
 import 'package:profilelists/Page2.dart';
 import 'package:profilelists/login_ff.dart';
@@ -108,9 +110,9 @@ class _Page1State extends State<Page1> {
                                 color: Colors.blue, fontSize: 15))
                       ]))),
               Container(
-                decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 202, 156, 136),
-                    borderRadius: BorderRadius.all(Radius.circular(30))),
+                decoration: BoxDecoration(
+                    color: bg,
+                    borderRadius: const BorderRadius.all(Radius.circular(30))),
                 width: 350,
                 height: 590,
                 child: Card(
@@ -173,11 +175,25 @@ class _Page1State extends State<Page1> {
                               print("Data Not Valid");
                             } else {
                               showMsg("Registration Successful !!");
-                              DataList.add(Model(namecon.text, numbercon.text,
-                                  emailcon.text, date, time, passcon.text));
+                              // DataList.add(Model(namecon.text, numbercon.text,
+                              //     emailcon.text, date, time, passcon.text));
+
+                              Map<String, dynamic> MapValues = {
+                                'name': namecon.text,
+                                'email': emailcon.text,
+                                'number': numbercon.text,
+                                'password': passcon.text,
+                                'birthdate': datercon.text,
+                              };
+
+                              print(MapValues);
+                              getvalues(MapValues).then((value) {
+                                showMsg("Data Saved");
+                              });
                               namecon.clear();
                               numbercon.clear();
                               emailcon.clear();
+                              passcon.clear();
                               date = DateTime.now();
                               time = TimeOfDay.now();
                               Navigator.of(context)

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:profilelists/Common/ShowMsg.dart';
